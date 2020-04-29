@@ -1,0 +1,13 @@
+version: "3.3"
+services:
+
+  postgres:
+    image: postgres:9.6
+    environment:
+      POSTGRES_PASSWORD: password
+    volumes:
+      - ${POSTGRES_DATA_DIR}:/var/lib/postgresql/data
+      - ${POSTGRES_SCRIPTS_DIR}:/docker-entrypoint-initdb.d/
+    ports:
+      - 5432:5432
+
