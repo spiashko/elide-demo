@@ -22,8 +22,8 @@
     </appender>
 
     <!-- Log Hibernate SQL Statements -->
-    <logger name="org.hibernate.SQL" level="DEBUG" />
-    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
+<!--    <logger name="org.hibernate.SQL" level="DEBUG" />-->
+<!--    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />-->
 
     <!-- Log JPA Datastore HQL Statements -->
     <logger name="com.yahoo.elide.datastores.jpa.porting.EntityManagerWrapper" level="DEBUG" />
@@ -31,6 +31,9 @@
     <!-- Log HTTP Error Explanations -->
     <logger name="com.yahoo.elide.graphql.QueryRunner" level="DEBUG" />
     <logger name="com.yahoo.elide.Elide" level="DEBUG" />
+
+    <!-- Log DataSource Requests -->
+    <logger name="net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener" level="DEBUG" />
 
     <root level="info">
         <appender-ref ref="STDOUT" />

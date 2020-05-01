@@ -1,9 +1,3 @@
-################################################
-# Copyright 2019, Verizon Media.
-# Licensed under the Apache License, Version 2.0
-# See LICENSE file in project root for terms.
-################################################
-
 elide:
   modelPackage: 'com.spiashko.elidedemo.models'
   json-api:
@@ -22,18 +16,14 @@ spring:
     name: Elide
   jpa:
     hibernate:
-      show_sql: true
       naming:
         physical-strategy: 'org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl'
-      dialect: 'org.hibernate.dialect.H2Dialect'
       ddl-auto: 'validate'
-      jdbc:
-        use_scrollable_resultset: true
   datasource:
+    type: com.zaxxer.hikari.HikariDataSource
     url: 'jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1'
     username: 'sa'
     password: ''
-    driver-class-name: 'org.h2.Driver'
   liquibase:
     change-log: 'classpath:db/changelog/changelog.xml'
 server:
@@ -48,18 +38,23 @@ spring:
   profiles: production
   jpa:
     hibernate:
-      show_sql: true
       naming:
         physical-strategy: 'org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl'
-      dialect: 'org.hibernate.dialect.PostgreSQLDialect'
       ddl-auto: 'validate'
-      jdbc:
-        use_scrollable_resultset: true
+    properties:
+      hibernate.dialect: 'org.hibernate.dialect.PostgreSQLDialect'
+      hibernate.jdbc.use_scrollable_resultset: true
+      hibernate.jdbc.fetch_size: 50
+      hibernate.default_batch_fetch_size: 100
+      hibernate.generate_statistics: true
   datasource:
+    type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/elide_demo_db
     username: elide_demo_user
     password: elide_demo_pass
-    driver-class-name: 'org.postgresql.Driver'
+    hikari:
+      poolName: Hikari
+      auto-commit: false
   liquibase:
     change-log: 'classpath:db/changelog/changelog.xml'
 server:

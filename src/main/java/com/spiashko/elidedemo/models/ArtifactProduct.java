@@ -7,10 +7,7 @@ package com.spiashko.elidedemo.models;
 
 import com.yahoo.elide.annotation.Include;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +21,9 @@ public class ArtifactProduct {
 
     private String description = "";
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private ArtifactGroup group = null;
 
-    @OneToMany(mappedBy = "artifact")
+    @OneToMany(mappedBy = "artifact", fetch = FetchType.LAZY)
     private List<ArtifactVersion> versions = new ArrayList<>();
 }
